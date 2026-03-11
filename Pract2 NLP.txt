@@ -1,0 +1,66 @@
+#Practical 1:Implement Tokenization of text(using NLTK and Spacy)
+import nltk
+nltk.download('all')
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+#word Tokenization using nltk Library
+from nltk.tokenize import word_tokenize
+text = "Hello! My Name is Ema. I Love Python."
+tokens = word_tokenize(text)
+print(tokens)
+// ['Hello', '!', 'My', 'Name', 'is', 'Ema', '.', 'I', 'Love', 'Python', '.']
+Sentense Tokenizer
+from nltk.tokenize import sent_tokenize
+text = "Hello, my name is Tanishka. I am learning NLP. It is amazing!"
+sentences = sent_tokenize(text)
+print("Sentence Tokens:", sentences)
+//Sentence Tokens: ['Hello, my name is Tanishka.', 'I am learning NLP.', 'It is amazing!']
+#Tokenize Social media statement
+from nltk.tokenize import TweetTokenizer
+tt = TweetTokenizer()
+text = "Hello Tanishka!! I Love //http://instagram.com"
+
+tokens = tt.tokenize(text)
+print("Tweet Tokens:", tokens)
+//Tweet Tokens: ['Hello', 'Tanishka', '!', '!', 'I', 'Love', '/', '/', 'http://instagram.com']
+#Regular Expression Tokenize
+from nltk.tokenize import RegexpTokenizer
+tokenizer = RegexpTokenizer(r'\w+')
+text = "Hello, my name is Tanishka! I am Learning NLP."
+tokens = tokenizer.tokenize(text)
+print("Regexp Tokens:", tokens)
+//Regexp Tokens: ['Hello', 'my', 'name', 'is', 'Tanishka', 'I', 'am', 'Learning', 'NLP']
+#
+# Tokenization using spacy Library
+- Word Tokenization
+- en_core_web_sm is a small English NLp model from spaCy
+It is used for 
+- Tokenize
+- Part-of-speech Tagging
+- Named Entity
+#using Spacy
+!pip install spacy
+!python -m spacy download en_core_web_sm
+import spacy
+nlp = spacy.load("en_core_web_sm")
+text = "Hello, My name is Tanishka! I am learning NLP."
+doc = nlp(text)
+tokens = [token.text for token in doc]
+print("Word Tokens:", tokens)
+//Word Tokens: ['Hello', ',', 'My', 'name', 'is', 'Tanishka', '!', 'I', 'am', 'learning', 'NLP', '.']
+- Sentence Tokenization using spacy
+import spacy
+nlp = spacy.load("en_core_web_sm")
+text = "Hello! my name is Tanishka. I am learning NLP. It is amazing!"
+doc = nlp(text)
+sentences = [sent.text for sent in doc.sents]
+print("Sentence Tokens:", sentences)
+//Sentence Tokens: ['Hello!', 'my name is Tanishka.', 'I am learning NLP.', 'It is amazing!']
+#Character Tokenization
+import spacy
+nlp = spacy.load("en_core_web_sm")
+text = "hello, My name is abc!"
+doc = nlp(text)
+char_tokens = [char for token in doc for char in token.text]
+print("Character Tokens:", char_tokens)
+//Character Tokens: ['h', 'e', 'l', 'l', 'o', ',', 'M', 'y', 'n', 'a', 'm', 'e', 'i', 's', 'a', 'b', 'c', '!']
